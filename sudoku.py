@@ -1,16 +1,29 @@
 # The code has been been created for a 9x9 sudoku puzzle
+import random
 
-sample = [
-    [7, 8, 0, 4, 0, 0, 1, 2, 0],
-    [6, 0, 0, 0, 7, 5, 0, 0, 9],
-    [0, 0, 0, 6, 0, 1, 0, 7, 8],
-    [0, 0, 7, 0, 4, 0, 2, 6, 0],
-    [0, 0, 1, 0, 5, 0, 9, 3, 0],
-    [9, 0, 4, 0, 6, 0, 0, 0, 5],
-    [0, 7, 0, 3, 0, 0, 0, 1, 2],
-    [1, 2, 0, 0, 0, 7, 4, 0, 0],
-    [0, 4, 9, 2, 0, 6, 0, 0, 7]
-]
+
+def create_board():
+    board = [[0 for _ in range(9)] for _ in range(9)]
+    values = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+    for _ in range(random.randint(6, 8)):
+        i = random.randint(0, 8)
+        j = random.randint(0, 8)
+
+        board[i][j] = random.choice(values)
+        values.remove(board[i][j])
+
+    solve(board)
+
+    for _ in range(random.randint(30, 54)):
+        data_dict = {key: [0, 1, 2, 3, 4, 5, 6, 7, 8] for key in range(9)}
+        i = random.randint(0, 8)
+        j = random.choice(data_dict[i])
+
+        board[i][j] = 0
+        data_dict[i].remove(j)
+
+    return board
 
 
 def show_sudoku(matrix):
@@ -78,7 +91,10 @@ def solve(matrix):
     return False
 
 
-show_sudoku(sample)
-solve(sample)
-print("\n")
-show_sudoku(sample)
+# sample = create_board()
+
+# print("\nUnsolved Sudoku(sudoku.py) :\n")
+# show_sudoku(sample)
+# print("\n\nSolved Sudoku(sudoku.py) :\n")
+# solve(sample)
+# show_sudoku(sample)
