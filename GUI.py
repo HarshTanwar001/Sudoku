@@ -136,6 +136,7 @@ def redraw_window(win, board, time_taken):
 
     # Draw time
     fnt = pygame.font.SysFont("comicsans", 40)
+
     text = fnt.render("Time -> " + format_time(time_taken), True, (0, 0, 0))
     win.blit(text, (0, 550))
 
@@ -158,10 +159,12 @@ def main():
     board = Grid(9, 9, 540, 540)
     key = None
     run = True
+    required = True
     start = time.time()
 
     while run:
-        play_time = round(time.time() - start)
+        if required:
+            play_time = round(time.time() - start)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -169,6 +172,7 @@ def main():
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
+                    required = False
                     while not board.is_finished():
                         row, col = empty_space(board.matrix())
 
