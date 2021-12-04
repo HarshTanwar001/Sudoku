@@ -14,10 +14,14 @@ def create_board():
         values.remove(board[i][j])
 
     solve(board)
+    data_dict = {key: [0, 1, 2, 3, 4, 5, 6, 7, 8] for key in range(9)}
 
     for _ in range(random.randint(30, 54)):
-        data_dict = {key: [0, 1, 2, 3, 4, 5, 6, 7, 8] for key in range(9)}
         i = random.randint(0, 8)
+
+        if len(data_dict[i]) == 0:
+            continue
+
         j = random.choice(data_dict[i])
 
         board[i][j] = 0
