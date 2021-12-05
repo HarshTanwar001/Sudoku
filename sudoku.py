@@ -1,5 +1,8 @@
 # The code has been been created for a 9x9 sudoku puzzle
+from statistics import mean, median
+
 import random
+import time
 
 
 def create_board():
@@ -94,6 +97,19 @@ def solve(matrix):
 
     return False
 
+
+time_data = []
+
+for _ in range(100):
+    sample = create_board()
+    start_time = time.time()
+    solve(sample)
+    time_data += [time.time() - start_time]
+
+print(f"Mean -> {mean(time_data)} s")
+print(f"Median -> {median(time_data)} s")
+print(f"Min -> {min(time_data): .10f} s")
+print(f"Max -> {max(time_data)} s")
 
 # sample = create_board()
 
